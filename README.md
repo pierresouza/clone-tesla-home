@@ -1,1 +1,0 @@
-# clone-tesla-home
