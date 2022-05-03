@@ -6,7 +6,7 @@ export const Container = styled(motion.div)`
   top: 0;
   height: 100vh;
   margin-top: -100vh;
-  z-index: 999;
+  
 
   display: flex;
   flex-direction: column;
