@@ -1,11 +1,13 @@
-import React, { ReactElement, useCallback, useRef, useState } from "react";
+import React, { ReactNode, useCallback, useRef, useState } from "react";
 
 import ModelsContext, { CarModel } from "../ModelsContext";
 
-import { Container } from "./styles";
+import ModelOverlay from "../ModelOverlay";
+
+import { Container, OverlaysRoot } from "./styles";
 
 type Props = {
-  children: ReactElement;
+  children: ReactNode;
 };
 
 const ModelsWrapper: React.FC<Props> = ({ children }) => {
@@ -42,7 +44,18 @@ const ModelsWrapper: React.FC<Props> = ({ children }) => {
         getModelByName,
       }}
     >
-      <Container ref={wrapperRef}>{children}</Container>;
+      <Container ref={wrapperRef}>
+        <OverlaysRoot>
+          {registeredModels.map((item) => (
+            <ModelOverlay key={item.modelName} model={item}>
+              {item.overlayNode}
+            </ModelOverlay>
+          ))}
+        </OverlaysRoot>
+
+        {children}
+      </Container>
+      ;
     </ModelsContext.Provider>
   );
 };
